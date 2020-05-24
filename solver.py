@@ -199,3 +199,48 @@ london = [[0,   [], [], [], []],
           [197, [184, 195, 196], [], [], []],
           [198, [159, 186, 187, 199], [], [], []],
           [199, [171, 188, 198], [128, 161], [], []]]
+
+def get_possible_stations(city, station, ticket):
+    # this collects all possible stations
+    possible_stations = []
+
+    # if not black ticket
+    if ticket != 4:
+        # every possible next station
+        for possible_station in city[station][ticket]:
+            # gets appended to the result
+            possible_stations.append(possible_station)
+    
+    # black ticket
+    else:
+        # every possible ticket, including black
+        for ticket in [1, 2, 3, 4]:
+            # every possible next station
+            for possible_station in city[station][ticket]:
+                # if it is not already in the list
+                if not possible_station in possible_stations:
+                    # gets appended to the result
+                    possible_stations.append(possible_station)
+    
+    # clean the result
+    possible_stations.sort()
+
+    # return all possible stations
+    return possible_stations
+
+# zero for unknown start station
+start_station = 23
+
+# possible moves:
+# 1 = taxi
+# 2 = bus
+# 3 = subway
+# 4 = black-ticket (any)
+tickets = [4]
+
+result = []
+
+for ticket in tickets:
+    result = get_possible_stations(london, start_station, ticket)
+
+print(result)
