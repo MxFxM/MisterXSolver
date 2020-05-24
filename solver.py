@@ -228,25 +228,42 @@ def get_possible_stations(city, station, ticket):
     # return all possible stations
     return possible_stations
 
+def solve(station, tickets):
+    # first the result is the starting station
+    result = [station]
+
+    # for every ticket that Mister X used
+    for ticket in tickets:
+        # copy the last results
+        last_result = result.copy()
+        # clear the new result list
+        result = []
+        # for every station in the results of the last ticket
+        for station in last_result:
+            # get possible next stations
+            next_result = get_possible_stations(london, station, ticket)
+            # and append them
+            for next_station in next_result:
+                # if they dont already exist
+                if not next_station in result:
+                    # to the new result list
+                    result.append(next_station)
+    
+    # sort the result
+    result.sort()
+
+    # finally, return the last results
+    return result
+
+
 # zero for unknown start station
-start_station = 4
+start_station = 5
 
 # possible moves:
 # 1 = taxi
 # 2 = bus
 # 3 = subway
 # 4 = black-ticket (any)
-tickets = [1, 3, 4]
+tickets = [1, 1]
 
-result = [start_station]
-
-for ticket in tickets:
-    last_result = result.copy()
-    result = []
-    for station in last_result:
-        next_result = get_possible_stations(london, station, ticket)
-        for next_station in next_result:
-            if not next_station in result:
-                result.append(next_station)
-
-print(result)
+print(solve(start_station, tickets))
