@@ -12,7 +12,7 @@ london = [[0,   [], [], [], []],
           [10,  [2, 11, 21, 34], [], [], []],
           [11,  [3, 10, 22], [], [], []],
           [12,  [3, 23], [], [], []],
-          [13,  [4, 23, 24], [14, 23, 52], [46, 89], []],
+          [13,  [4, 23, 24], [14, 23, 52], [46, 67, 89], []],
           [14,  [15, 25], [13, 15], [], []],
           [15,  [5, 14, 16, 26, 28], [14, 29], [], []],
           [16,  [5, 15, 28, 29], [], [], []],
@@ -229,18 +229,24 @@ def get_possible_stations(city, station, ticket):
     return possible_stations
 
 # zero for unknown start station
-start_station = 23
+start_station = 4
 
 # possible moves:
 # 1 = taxi
 # 2 = bus
 # 3 = subway
 # 4 = black-ticket (any)
-tickets = [4]
+tickets = [1, 3, 4]
 
-result = []
+result = [start_station]
 
 for ticket in tickets:
-    result = get_possible_stations(london, start_station, ticket)
+    last_result = result.copy()
+    result = []
+    for station in last_result:
+        next_result = get_possible_stations(london, station, ticket)
+        for next_station in next_result:
+            if not next_station in result:
+                result.append(next_station)
 
 print(result)
