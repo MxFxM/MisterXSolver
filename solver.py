@@ -27,7 +27,7 @@ def get_possible_stations(city, station, ticket):
     # return all possible stations
     return possible_stations
 
-def solve(station, tickets):
+def solve(city, station, tickets):
     # first the result is the starting station
     result = [station]
 
@@ -40,7 +40,7 @@ def solve(station, tickets):
         # for every station in the results of the last ticket
         for station in last_result:
             # get possible next stations
-            next_result = get_possible_stations(london, station, ticket)
+            next_result = get_possible_stations(city, station, ticket)
             # and append them
             for next_station in next_result:
                 # if they dont already exist
@@ -55,14 +55,5 @@ def solve(station, tickets):
     return result
 
 
-# zero for unknown start station
-start_station = 5
-
-# possible moves:
-# 1 = taxi
-# 2 = bus
-# 3 = subway
-# 4 = black-ticket (any)
-tickets = [1, 1]
-
-print(solve(start_station, tickets))
+if __name__ == "__main__":
+    print("Please execute MisterXSolver.py as main")

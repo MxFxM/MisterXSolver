@@ -199,3 +199,6 @@ london = [[0,   [], [], [], []],
           [198, [159, 186, 187, 199], [], [], []],
           [199, [171, 188, 198], [128, 161], [], []]]
 
+
+if __name__ == "__main__":
+    print("Please execute MisterXSolver.py as main")
