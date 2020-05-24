@@ -28,8 +28,13 @@ def get_possible_stations(city, station, ticket):
     return possible_stations
 
 def solve(city, station, tickets):
-    # first the result is the starting station
-    result = [station]
+    # for an unknown start station
+    if station == 0:
+        # allow all stations in the city
+        result = [n+1 for n in range(len(city)-1)]
+    else:
+        # first the result is the starting station
+        result = [station]
 
     # for every ticket that Mister X used
     for ticket in tickets:
